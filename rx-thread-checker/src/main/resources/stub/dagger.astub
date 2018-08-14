@@ -1,0 +1,10 @@
+import org.checkerframework.checker.guieffect.qual.*;
+import com.ubercab.rxthreadchecker.qual.*;
+
+//  *********************** PACKAGE DAGGER  ***********************
+package dagger;
+@PolyUIType
+public interface Lazy<T extends @UI Object> {
+     @PolyUIEffect
+     T get();
+}

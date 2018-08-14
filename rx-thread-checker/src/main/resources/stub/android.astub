@@ -1,0 +1,238 @@
+import org.checkerframework.checker.guieffect.qual.*;
+import org.checkerframework.checker.guieffect.qual.*;
+import com.ubercab.rxthreadchecker.qual.*;
+
+//  *********************** PACKAGE ANDROID.APP ***********************
+package android.app;
+class Activity extends ContextThemeWrapper implements Factory2, Callback, Callback, OnCreateContextMenuListener, ComponentCallbacks2 {
+    @UIEffect void attachBaseContext(Context newBase);
+    @UIEffect boolean onOptionsItemSelected(MenuItem arg0);
+    @UIEffect void openOptionsMenu();
+    @UIEffect void onNewIntent(Intent intent);
+    @UIEffect void onResume();
+    @UIEffect void onCreate(Bundle savedState);
+    @UIEffect void onStart();
+    @UIEffect void onPause();
+    @UIEffect void onStop();
+    @UIEffect void onDestroy();
+    @UIEffect boolean onCreateOptionsMenu(Menu menu);
+    @UIEffect void onBackPressed();
+    void runOnUiThread(@UI Runnable action);
+    @UIEffect void onWindowFocusChanged(boolean hasFocus);
+    @UIEffect void onActivityResult(int request, int result, Intent data);
+}
+@UIType class Dialog {}
+@UIType class AlertDialog {}
+class Application {
+    @UIEffect void onCreate();
+    interface ActivityLifecycleCallbacks {
+        @UIEffect void onActivityStarted(Activity a);
+        @UIEffect void onActivityStopped(Activity a);
+    }
+}
+
+//  *********************** PACKAGE ANDROID.VIEW ***********************
+@UIPackage package android.view;
+class ContextThemeWrapper extends ContextWrapper {
+    @SafeEffect AssetManager getAssets();
+}
+class ViewPropertyAnimator {
+    ViewPropertyAnimator withStartAction(@UI Runnable arg0);
+    ViewPropertyAnimator withEndAction(@UI Runnable arg0);
+}
+class View {
+    void addOnLayoutChangeListener(@UI OnLayoutChangeListener l);
+    void removeOnLayoutChangeListener(@UI OnLayoutChangeListener l);
+    boolean post(@UI Runnable r);
+    void postOnAnimation(@UI Runnable action);
+    @SafeEffect Context getContext();
+    @SafeEffect Resources getResources();
+}
+class ViewTreeObserver {
+    void removeOnGlobalLayoutListener(@UI OnGlobalLayoutListener arg0);
+}
+
+//  *********************** PACKAGE ANDROID.WIDGET ***********************
+@UIPackage package android.widget;
+class ScrollView {
+    boolean postDelayed(@UI Runnable r, long delay);
+}
+class BaseAdapter {
+    void unregisterDataSetObserver(@UI DataSetObserver observer);
+    void registerDataSetObserver(@UI DataSetObserver observer);
+}
+class EditText extends TextView {
+    @SafeEffect Editable getText();
+}
+@UIPackage package android.support.v7.widget;
+@UIPackage package android.support.v4.widget;
+@UIPackage package android.support.v4.view;
+@UIPackage package android.animation;
+@UIPackage package android.view.animation;
+
+//  *********************** PACKAGE ANDROID.CONTENT ***********************
+package android.content;
+class ContextWrapper {
+    @UIEffect void attachBaseContext(Context newBase);
+}
+
+//  *********************** PACKAGE ANDROID.SUPPORT.V7.APP ***********************
+package android.support.v7.app;
+class AppCompatActivity extends FragmentActivity {
+    @UIEffect void onResume();
+    @UIEffect void onCreate(Bundle savedState);
+    @UIEffect void onStart();
+    @UIEffect void onPause();
+    @UIEffect void onStop();
+    @UIEffect void onDestroy();
+    @UIEffect boolean onCreateOptionsMenu(Menu m);
+    @UIEffect void onActivityResult(int request, int result, Intent data);
+}
+
+class AppCompatDialog {
+    @UIEffect void onCreate(Bundle savedState);
+}
+
+//  *********************** PACKAGE ANDROID.SUPPORT.V4.APP ***********************
+package android.support.v4.app;
+class FragmentActivity {
+    @UIEffect void onNewIntent(Intent intent);
+    @UIEffect void onResume();
+    @UIEffect void onCreate(Bundle savedState);
+    @UIEffect void onStart();
+    @UIEffect void onPause();
+    @UIEffect void onStop();
+    @UIEffect void onDestroy();
+    @UIEffect void onBackPressed();
+    @UIEffect void onActivityResult(int request, int result, Intent data);
+}
+class SupportActivity extends Activity {
+    @UIEffect void onNewIntent(Intent intent);
+    @UIEffect void onResume();
+    @UIEffect void onCreate(Bundle savedState);
+    @UIEffect void onStart();
+    @UIEffect void onPause();
+    @UIEffect void onStop();
+    @UIEffect void onDestroy();
+    @UIEffect void onBackPressed();
+    @UIEffect void onActivityResult(int request, int result, Intent data);
+}
+class BaseFragmentActivityGingerbread {
+    @UIEffect void onCreate(Bundle savedState);
+}
+
+//  *********************** PACKAGE ANDROID.SUPPORT.CONSTRAINT ***********************
+package android.support.constraint;
+@UIType class ConstraintLayout extends ViewGroup { }
+
+//  *********************** PACKAGE ANDROID.CONTENT ***********************
+package android.content;
+interface DialogInterface {
+    @UIEffect void cancel();
+    @UIEffect void dismiss();
+    @UIType interface OnKeyListener {}
+    @UIType interface OnMultiChoiceClickListener {}
+    @UIType interface OnClickListener {}
+    @UIType interface OnShowListener {}
+    @UIType interface OnDismissListener {}
+    @UIType interface OnCancelListener {}
+}
+
+//  *********************** PACKAGE ANDROID.SUPPORT.DESIGN.WIDGET ***********************
+@UIPackage package android.support.design.widget;
+class BottomSheetBehavior<V extends View> extends Behavior<V> {
+    @PolyUIType abstract class BottomSheetCallback {
+        @PolyUIEffect void onSlide(View sheet, float offset);
+        @PolyUIEffect void onStateChanged(View sheet, int newState);
+    }
+}
+@UIType class Snackbar {
+    @UIEffect Snackbar setAction(CharSequence text, @UI View.OnClickListener listener);
+}
+
+//  *********************** PACKAGE ANDROID.WEBKIT ***********************
+package android.webkit;
+@UIType class WebView {}
+@UIType class WebViewClient {}
+
+//  *********************** PACKAGE ANDROID.OS ***********************
+package android.os;
+@PolyUIType
+class Handler {
+    boolean postDelayed(@UI Runnable r, long delay);
+    boolean post(@UI Runnable r);
+    void removeCallbacks(@UI Runnable arg0);
+    void removeCallbacksAndMessages(@PolyUI Handler this, @PolyUI Object token);
+    boolean postAtFrontOfQueue(@PolyUI Handler this, @PolyUI Runnable r);
+    @PolyUIEffect void handleMessage(Message msg);
+}
+
+class Looper {
+    @UIThread static Looper getMainLooper();
+    @PolyThread Thread getThread(@PolyThread Looper this);
+}
+
+//  *********************** PACKAGE ANDROID.PREFERENCE ***********************
+package android.preference;
+class Preference implements Comparable<Preference> {
+    void setOnPreferenceClickListener(@PolyUI OnPreferenceClickListener listener);
+    @PolyUIType
+    interface OnPreferenceClickListener {
+        @PolyUIEffect boolean onPreferenceClick(Preference p);
+    }
+}
+
+
+//  *********************** PACKAGE ANDROID.SUPPORT.V7.WIDGET.HELPER ***********************
+package android.support.v7.widget.helper;
+class ItemTouchHelper {
+    class Callback {
+        @UIEffect boolean onMove(RecyclerView rv, ViewHolder vh, ViewHolder target);
+        @UIEffect void onSwiped(ViewHolder vh, int dir);
+        @UIEffect void onChildDraw(Canvas c, RecyclerView rv, ViewHolder vh, float dx, float dy, int state, boolean isActive);
+    }
+}
+
+//  *********************** PACKAGE ANDROID.TEXT.STYLE ***********************
+package android.text.style;
+class ClickableSpan {
+    @UIEffect void onClick(View v);
+}
+
+//  *********************** PACKAGE ANDROID.DATABASE ***********************
+package android.database;
+@PolyUIType
+public abstract class DataSetObserver {
+    @PolyUIEffect void onChanged();
+    @PolyUIEffect void onInvalidated();
+}
+
+//  *********************** PACKAGE ANDROID.UTIL ***********************
+package android.util;
+@PolyUIType
+class Property<T, V> {
+    @PolyUIEffect V get(T arg0);
+    @PolyUIEffect void set(T arg0, V arg1);
+}
+
+//  *********************** PACKAGE ANDROID.ANIMATION ***********************
+@UIPackage package android.animation;
+class ObjectAnimator {
+    void setProperty(@UI Property property);
+    static <T> ObjectAnimator ofFloat(T target, @UI Property<T, Float> property, float... values);
+    static <T, V> ObjectAnimator ofObject(T target, @UI Property<T, V> property, TypeEvaluator<V> evaluator, V... values);
+}
+class PropertyValuesHolder {
+    static PropertyValuesHolder ofFloat(@UI Property property, float... values);
+}
+
+//  *********************** PACKAGE ANDROID.SUPPORT.V4.VIEW ***********************
+package android.support.v4.view;
+class ViewCompat {
+    @UIEffect static void postOnAnimation(View view, @UI Runnable action);
+}
+
+class PagerAdapter {
+    void unregisterDataSetObserver(@UI DataSetObserver observer);
+    void registerDataSetObserver(@UI DataSetObserver observer);
+}

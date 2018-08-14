@@ -1,0 +1,40 @@
+import org.checkerframework.checker.guieffect.qual.*;
+import com.ubercab.rxthreadchecker.qual.*;
+
+package com.uber.autodispose;
+
+interface ObservableSubscribeProxy<T> {
+    Disposable subscribe();
+    @SubscribeEffects({0}) Disposable subscribe(@UI Consumer<? super T> arg0);
+    @SubscribeEffects({0,1}) Disposable subscribe(@UI Consumer<? super T> arg0, @UI Consumer<? super Throwable> arg1);
+    @SubscribeEffects({0,1,2}) Disposable subscribe(@UI Consumer<? super T> arg0, @UI Consumer<? super Throwable> arg1, @UI Action arg2);
+    @SubscribeEffects({0,1,2,3}) Disposable subscribe(@UI Consumer<? super T> arg0, @UI Consumer<? super Throwable> arg1, @UI Action arg2, @UI Consumer<? super Disposable> arg3);
+    @SubscribeEffects({0}) public void subscribe(@UI Observer<T> arg0);
+    @SubscribeEffects({0}) <E> E subscribeWith(@UI E arg0);
+}
+
+interface MaybeSubscribeProxy<T> {
+    Disposable subscribe();
+    @SubscribeEffects({0}) Disposable subscribe(@UI Consumer<? super T> arg0);
+    @SubscribeEffects({0,1}) Disposable subscribe(@UI Consumer<? super T> arg0, @UI Consumer<? super Throwable> arg1);
+    @SubscribeEffects({0,1,2}) Disposable subscribe(@UI Consumer<? super T> arg0, @UI Consumer<? super Throwable> arg1, @UI Action arg2);
+    @SubscribeEffects({0}) void subscribe(@UI MaybeObserver<T> arg0);
+    @SubscribeEffects({0}) <E> E subscribeWith(@UI E arg0);
+}
+
+interface SingleSubscribeProxy<T> {
+    Disposable subscribe();
+    @SubscribeEffects({0}) Disposable subscribe(@UI Consumer<? super T> arg0);
+    @SubscribeEffects({0}) Disposable subscribe(@UI BiConsumer<? super T,? super Throwable> arg0);
+    @SubscribeEffects({0,1}) Disposable subscribe(@UI Consumer<? super T> arg0, @UI Consumer<? super Throwable> arg1);
+    @SubscribeEffects({0}) void subscribe(@UI SingleObserver<T> arg0);
+    @SubscribeEffects({0}) <E> E subscribeWith(@UI E arg0);
+}
+
+interface CompletableSubscribeProxy {
+    Disposable subscribe();
+    @SubscribeEffects({0}) Disposable subscribe(@UI Action arg0);
+    @SubscribeEffects({0,1}) Disposable subscribe(@UI Action arg0, @UI Consumer<? super Throwable> arg1);
+    @SubscribeEffects({0}) void subscribe(@UI CompletableObserver arg0);
+    @SubscribeEffects({0}) <E> E subscribeWith(@UI E arg0);
+}

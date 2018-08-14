@@ -1,0 +1,42 @@
+import org.checkerframework.checker.guieffect.qual.*;
+import com.ubercab.rxthreadchecker.qual.*;
+/* READ ME BEFORE MODIFYING THIS FILE
+ This stub file is used to provide annotations to a Checker Framework typechecker.  While it
+ looks like Java, the syntax has a number of key differences from Java.  What's more, most
+ syntax errors will not throw an error - they will silently fail and you will have no idea
+ what's going on.  Read the _entire_ annotation stub chapter of the Checker Framework manual
+ at https://checkerframework.org/manual/#stub-using before proceeding.
+ */
+//  *********************** PACKAGE COM.SQUAREUP.PICASSO ***********************
+package com.squareup.picasso;
+
+@PolyUIType
+interface Callback {
+    @PolyUIEffect void onSuccess();
+    @PolyUIEffect void onError();
+
+    @PolyUIType
+    static class EmptyCallback implements Callback {
+        @PolyUIEffect void onSuccess();
+        @PolyUIEffect void onError();
+    }
+}
+
+@PolyUIType
+class RequestCreator {
+    @PolyUIEffect void into(@PolyUI Target target);
+    @PolyUIEffect void into(ImageView target, @PolyUI Callback callback);
+}
+
+@PolyUIType
+public interface Target {
+  @PolyUIEffect void onBitmapLoaded(Bitmap bitmap, LoadedFrom from);
+  @PolyUIEffect void onBitmapFailed(Drawable errorDrawable);
+  @PolyUIEffect void onPrepareLoad(Drawable placeHolderDrawable);
+}
+
+@PolyUIType
+class Picasso {
+    public @PolyUI RequestCreator load(@PolyUI Picasso this, Uri uri);
+    public @PolyUI RequestCreator load(@PolyUI Picasso this, String path);
+}

@@ -1,0 +1,56 @@
+import org.checkerframework.checker.guieffect.qual.*;
+import com.ubercab.rxthreadchecker.qual.*;
+/* READ ME BEFORE MODIFYING THIS FILE
+ This stub file is used to provide annotations to a Checker Framework typechecker.  While it
+ looks like Java, the syntax has a number of key differences from Java.  What's more, most
+ syntax errors will not throw an error - they will silently fail and you will have no idea
+ what's going on.  Read the _entire_ annotation stub chapter of the Checker Framework manual
+ at https://checkerframework.org/manual/#stub-using before proceeding.
+ */
+ // *********************** UI PACKAGES ***********************
+@UIPackage package com.github.mikephil.charting.charts;
+@UIPackage package com.jakewharton.rxbinding2.widget;
+ // *********************** PACKAGE COM.GITHUB.MIKEPHIL.CHARTING ***********************
+package com.github.mikephil.charting.charts;
+
+class Chart<T extends ChartData<? extends DataSet<? extends Entry>>> extends ViewGroup implements ChartInterface {
+    void setOnChartValueSelectedListener(@UI OnChartValueSelectedListener l);
+}
+
+package com.github.mikephil.charting.listener;
+
+@UIType class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBase<? extends BarLineScatterCandleBubbleData<? extends BarLineScatterCandleBubbleDataSet<? extends Entry>>>> { }
+
+@UIType abstract class ChartTouchListener<T extends Chart<?>> extends SimpleOnGestureListener implements OnTouchListener { }
+
+@PolyUIType
+interface OnChartValueSelectedListener {
+    @PolyUIEffect void onValueSelected(Entry var1, int var2, Highlight var3);
+    @PolyUIEffect void onNothingSelected();
+}
+
+package com.github.mikephil.charting.components;
+
+@UIType abstract class MarkerView extends RelativeLayout { }
+
+@UIPackage package com.github.mikephil.charting.renderer;
+
+ // *********************** PACKAGE COM.GOOGLE.ANDROID ***********************
+package com.google.android.cameraview;
+
+class CameraView {
+    @UIType class Callback { }
+}
+
+// *********************** PACKAGE COM.JAKEWHARTON.RXBINDING2.WIDGET ***********************
+package com.jakewharton.rxbinding2.widget;
+
+class RxRadioGroup {
+    @UIThread static InitialValueObservable<Integer> checkedChanges(RadioGroup view);
+}
+
+// *********************** PACKAGE COM.FACEBOOK.BUCK.ANDROID.SUPPORT.EXOPACKAGE ***********************
+package com.facebook.buck.android.support.exopackage;
+
+@UIType
+interface ApplicationLike { }

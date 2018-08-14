@@ -1,0 +1,15 @@
+import org.checkerframework.checker.guieffect.qual.*;
+import com.ubercab.rxthreadchecker.qual.*;
+
+/* READ ME BEFORE MODIFYING THIS FILE                                                                                                                                                    This stub file is used to provide annotations to a Checker Framework typechecker.  While it
+ looks like Java, the syntax has a number of key differences from Java.  What's more, most
+ syntax errors will not throw an error - they will silently fail and you will have no idea
+ what's going on.  Read the _entire_ annotation stub chapter of the Checker Framework manual
+ at https://checkerframework.org/manual/#stub-using before proceeding.
+*/
+
+package io.reactivex.observables;
+
+class ConnectableObservable<T> extends Observable<T> {
+    @PolyThread Observable<T> refCount(@PolyThread ConnectableObservable<T> this);
+}

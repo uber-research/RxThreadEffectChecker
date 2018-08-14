@@ -1,0 +1,130 @@
+import org.checkerframework.checker.guieffect.qual.*;
+import com.ubercab.rxthreadchecker.qual.*;
+
+//  *********************** PACKAGE IO.REACTIVEX ***********************
+package io.reactivex;
+@PolyUIType
+interface Observer<T> {
+    @PolyUIEffect void onComplete(@PolyUI Observer<T> this);
+    @PolyUIEffect void onError(@PolyUI Observer<T> this, Throwable e);
+    @PolyUIEffect void onNext(@PolyUI Observer<T> this, T t);
+    @PolyUIEffect void onSubscribe(@PolyUI Observer<T> this, Disposable d);
+}
+
+@PolyUIType
+interface SingleObserver<T> {
+    @PolyUIEffect void onSubscribe(@PolyUI SingleObserver<T> this, Disposable s);
+    @PolyUIEffect void onSuccess(@PolyUI SingleObserver<T> this, T t);
+    @PolyUIEffect void onError(@PolyUI SingleObserver<T> this, Throwable e);
+}
+
+package rx;
+@PolyUIType
+interface Observer<T> {
+    @PolyUIEffect void onCompleted(@PolyUI Observer<T> this);
+    @PolyUIEffect void onError(@PolyUI Observer<T> this, Throwable e);
+    @PolyUIEffect void onNext(@PolyUI Observer<T> this, T t);
+}
+
+@PolyUIType
+class Subscriber<T> implements Observer<T>, Subscription {
+    protected Subscriber();
+    protected Subscriber(Subscriber<?> arg0);
+    protected Subscriber(Subscriber<?> arg0, boolean arg1);
+    void add(Subscription arg0);
+    void unsubscribe();
+    boolean isUnsubscribed();
+    @PolyUIEffect void onStart();
+    protected void request(long arg0);
+    void setProducer(Producer arg0);
+}
+
+//  *********************** PACKAGE IO.REACTIVEX.OBSERVERS ***********************
+package io.reactivex.observers;
+
+@PolyUIType
+class DisposableObserver<T> implements Observer<T>, Disposable {
+    @PolyUIEffect void onStart(@PolyUI DisposableObserver<T> this);
+}
+
+@PolyUIType
+class DisposableSingleObserver<T> implements SingleObserver<T>, Disposable {
+    @PolyUIEffect void onStart(@PolyUI DisposableSingleObserver<T> this);
+}
+
+//  *********************** PACKAGE IO.REACTIVEX.SCHEDULERS ***********************
+package io.reactivex.schedulers;
+
+class Schedulers {
+    static @CompThread Scheduler computation();
+    static @CompThread Scheduler single();
+    static @CompThread Scheduler io(); //Treat I/O thread as a computation thread for now
+
+    static @AnyThread  Scheduler newThread();
+    static @AnyThread  Scheduler trampoline();
+}
+
+//  *********************** PACKAGE IO.REACTIVEX.ANDROID.SCHEDULERS ***********************
+package io.reactivex.android.schedulers;
+class AndroidSchedulers {
+    static @UIThread Scheduler mainThread();
+    static @PolyThread Scheduler from(@PolyThread android.os.Looper looper);
+}
+
+//  *********************** PACKAGE IO.REACTIVEX.ANDROID.SCHEDULERS ***********************
+package rx.android.schedulers;
+class AndroidSchedulers {
+    static @UIThread Scheduler mainThread();
+}
+
+//  *********************** PACKAGE IO.REACTIVEX.FUNCTIONS ***********************
+package io.reactivex.functions;
+@PolyUIType
+interface Action {
+    @PolyUIEffect void run();
+}
+
+@PolyUIType
+interface Consumer<T> {
+    @PolyUIEffect void accept(T arg0) throws Exception;
+}
+
+@PolyUIType
+interface Function<T, R> {
+    @PolyUIEffect R apply(T arg0) throws Exception;
+}
+
+@PolyUIType
+interface Function3<T1, T2, T3, R> {
+    @PolyUIEffect R apply(T1 arg0, T2 arg1, T3 arg2) throws Exception;
+}
+
+@PolyUIType
+interface Predicate<T> {
+    @PolyUIEffect boolean test(T arg0) throws Exception;
+}
+@PolyUIType
+interface BiConsumer<T1,T2> {
+    @PolyUIEffect void accept(T1 arg0, T2 arg1) throws Exception;
+}
+
+@PolyUIType
+interface BiFunction<T1, T2, R> {
+    @PolyUIEffect R apply(T1 t1, T2 t2) throws Exception;
+}
+
+//  *********************** PACKAGE RX.FUNCTIONS ***********************
+package rx.functions;
+@PolyUIType interface Action0 extends Action {
+    @PolyUIEffect void call();
+}
+@PolyUIType interface Func0<R>                 extends Function {@PolyUIEffect R call();}
+@PolyUIType interface Func1<T, R> extends Function {
+    @PolyUIEffect R call(T arg0);
+}
+@PolyUIType interface Func2<T1, T2, R>         extends Function {@PolyUIEffect R call(T1 arg0, T2 arg1);}
+@PolyUIType interface Func3<T1, T2, T3, R>     extends Function {@PolyUIEffect R call(T1 arg0, T2 arg1, T3 arg2);}
+@PolyUIType interface Func4<T1, T2, T3, T4, R> extends Function {@PolyUIEffect R call(T1 arg0, T2 arg1, T3 arg2, T4 arg3);}
+@PolyUIType interface Action1<T> extends Action {
+    @PolyUIEffect void call(T arg0);
+}

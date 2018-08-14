@@ -1,0 +1,40 @@
+import org.checkerframework.checker.guieffect.qual.*;
+import com.ubercab.rxthreadchecker.qual.*;
+
+//  *********************** PACKAGE JAVA.UTIL ***********************
+package java.util;
+
+interface List<@AlwaysSafe E extends @UI Object> {
+    boolean removeAll(Collection<@AlwaysSafe ? extends @UI Object> var1);
+}
+
+interface Set<@AlwaysSafe E extends @UI Object> { }
+
+interface Map<@AlwaysSafe K extends @UI Object, @AlwaysSafe V extends @UI Object> { }
+
+class Collections {
+    // What is the effect of no hands clapping? Apparently "@AlwaysSafe"
+    public static final List<? extends @AlwaysSafe Object> EMPTY_LIST;
+    public static final Map<? extends @AlwaysSafe Object, ? extends @AlwaysSafe Object> EMPTY_MAP;
+    public static final Set<? extends @AlwaysSafe Object> EMPTY_SET;
+}
+
+@PolyUIType
+class TimerTask implements Runnable {
+    @PolyUIEffect void run();
+}
+class Timer {
+    void schedule(@UI TimerTask arg0, long arg1);
+    void schedule(@UI TimerTask arg0, Date arg1);
+    void schedule(@UI TimerTask arg0, long arg1, long arg2);
+    void schedule(@UI TimerTask arg0, Date arg1, long arg2);
+    void scheduleAtFixedRate(@UI TimerTask arg0, long arg1, long arg2);
+    void scheduleAtFixedRate(@UI TimerTask arg0, Date arg1, long arg2);
+}
+
+//  *********************** PACKAGE JAVA.LANG ***********************
+package java.lang;
+@PolyUIType
+interface Runnable {
+    @PolyUIEffect void run();
+}
