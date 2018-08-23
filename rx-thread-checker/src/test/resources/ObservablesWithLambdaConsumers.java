@@ -18,7 +18,6 @@ package com.ubercab.rxthreadchecker.testdata;
 import io.reactivex.*;
 import io.reactivex.functions.*;
 import io.reactivex.schedulers.Schedulers;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import com.ubercab.rxthreadchecker.qual.*;
 import org.checkerframework.checker.guieffect.qual.*;
 
@@ -40,14 +39,14 @@ public class ObservablesWithLambdaConsumers {
     }
 
     private static void srcVisibleDoUIMethod(@UI Consumer<Object> uiEffectfulConsumer) {
-        Observable.empty().observeOn(AndroidSchedulers.mainThread()).doAfterNext(uiEffectfulConsumer);
+        Observable.empty().observeOn(MockAndroidSchedulers.mainThread()).doAfterNext(uiEffectfulConsumer);
     }
 
     private void safeConsumerLambdaEffects()
     {
         Observable.empty().doAfterNext(arg -> noEffectMethod());
         srcVisibleDoUIMethod(arg -> uiEffectMethod());
-        Observable.empty().observeOn(AndroidSchedulers.mainThread()).doAfterNext(arg -> uiEffectMethod());
+        Observable.empty().observeOn(MockAndroidSchedulers.mainThread()).doAfterNext(arg -> uiEffectMethod());
     }
 
     private void unsafeConsumerLambdaEffects()

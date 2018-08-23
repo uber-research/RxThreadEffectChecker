@@ -22,18 +22,15 @@ sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
 dependencies {
-    compile deps.build.checkerframework
-    compile deps.build.rxandroid2
-    compile deps.build.rxjava2
+    implementation deps.build.checkerframework
 
-    compile project(":rx-thread-checker-qual")
+    implementation project(":rx-thread-checker-qual")
 
-    testCompile deps.test.androidStubs
-    testCompile deps.test.checkerframeworkTestlib
-    testCompile deps.test.junit4
-}
+    testImplementation deps.test.androidStubs
+    testImplementation deps.test.checkerframeworkTestlib
+    testImplementation deps.test.junit4
+    testImplementation deps.build.rxjava2
 
-def stubDir = 'rx-thread-checker/src/main/resources/stub'
-test {
-    systemProperty 'stubs', stubDir
+    // Would be ideal, but this is an AAR and we can't depend on it for a java lib:
+    // testImplementation deps.build.rxandroid2
 }

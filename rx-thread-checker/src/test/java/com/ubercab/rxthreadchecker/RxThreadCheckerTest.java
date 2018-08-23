@@ -18,11 +18,12 @@ package com.ubercab.rxthreadchecker;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.checkerframework.framework.test.CheckerFrameworkPerDirectoryTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-@SuppressWarnings("CheckTestExtendsBaseClass")
 @RunWith(JUnit4.class)
 public class RxThreadCheckerTest extends CheckerFrameworkPerDirectoryTest {
   public RxThreadCheckerTest() {
@@ -31,11 +32,24 @@ public class RxThreadCheckerTest extends CheckerFrameworkPerDirectoryTest {
         com.ubercab.rxthreadchecker.RxThreadChecker.class,
         null,
         "-Anomsgtext",
-        "-Anocheckjdk");
+            "-Anocheckjdk",
+            "-AprintErrorStack",
+            //"-AstubWarnIfNotFound",
+            //"-AstubWarnIfNotFoundIgnoresClasses",
+            "-Astubs="+testStubString());
   }
 
   private static List<File> testSources() {
     return Arrays.asList(
         new File("src/test/resources").listFiles());
+  }
+
+  private static String testStubString() {
+    return testStubFiles().stream().map(f -> f.getAbsolutePath()).collect(Collectors.joining(":"));
+  }
+
+  private static List<File> testStubFiles() {
+    return Arrays.asList(
+            new File("src/main/resources/stub/").listFiles());
   }
 }

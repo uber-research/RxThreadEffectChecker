@@ -17,7 +17,6 @@ package com.ubercab.rxthreadchecker.testdata;
 
 import io.reactivex.*;
 import io.reactivex.schedulers.Schedulers;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import com.ubercab.rxthreadchecker.qual.*;
 import org.checkerframework.checker.guieffect.qual.*;
 
@@ -38,17 +37,18 @@ public class ObservableSchedulers {
         Observable.empty().subscribe(safeAction);
 
         Observable<Object> o1 = Observable.empty(); //Make a new stream
-        @UIThread Observable<Object> o2 = o1.observeOn(AndroidSchedulers.mainThread()); // Specify that it should be observed on the UI thread
+        @UIThread Observable<Object> o2 = o1.observeOn(MockAndroidSchedulers.mainThread()); // Specify that it should
+        // be observed on the UI thread
         o2.subscribe(uiEffectfulAction); //subscribe a callback with UI effect
         //Equivalent operations without intermediate variables:
-        Observable.empty().observeOn(AndroidSchedulers.mainThread()).subscribe(uiEffectfulAction);
+        Observable.empty().observeOn(MockAndroidSchedulers.mainThread()).subscribe(uiEffectfulAction);
 
         Observable<Object> o3 = Observable.empty(); //Make a new stream
-        @UIThread Observable<Object> o4 = o3.observeOn(AndroidSchedulers.mainThread()); // Specify that it should be observed on the UI thread
+        @UIThread Observable<Object> o4 = o3.observeOn(MockAndroidSchedulers.mainThread()); // Specify that it should be observed on the UI thread
         @UIThread Observable<Object> o5 = o4.doOnEach(safeAction); //Perform some effect-free operations (e.g. map, filter, etc.)  o5 should have inferred @UIThread annotation
         o5.subscribe(uiEffectfulAction);
         //Equivalent operations without intermediate variables:
-        Observable.empty().observeOn(AndroidSchedulers.mainThread()).doOnEach(safeAction).subscribe(uiEffectfulAction);
+        Observable.empty().observeOn(MockAndroidSchedulers.mainThread()).doOnEach(safeAction).subscribe(uiEffectfulAction);
     }
 
     //Incorrect usage, type-checking errors should be raised
@@ -75,15 +75,15 @@ public class ObservableSchedulers {
     private void safeObservableMergeEffects(io.reactivex.@UI Observer<Object> uiEffectfulAction)
     {
         Observable<Object> o1 = Observable.empty();
-        @UIThread Observable<Object> o2 = o1.observeOn(AndroidSchedulers.mainThread());
-        @UIThread Observable<Object> o3 = o1.observeOn(AndroidSchedulers.mainThread());
+        @UIThread Observable<Object> o2 = o1.observeOn(MockAndroidSchedulers.mainThread());
+        @UIThread Observable<Object> o3 = o1.observeOn(MockAndroidSchedulers.mainThread());
         Observable.merge(o2, o3).subscribe(uiEffectfulAction);
     }
 
     private void unsafeObservableMergeEffects(io.reactivex.@UI Observer<Object> uiEffectfulAction)
     {
         Observable<Object> o1 = Observable.empty();
-        @UIThread Observable<Object> o2 = Observable.empty().observeOn(AndroidSchedulers.mainThread());
+        @UIThread Observable<Object> o2 = Observable.empty().observeOn(MockAndroidSchedulers.mainThread());
         // :: error: (rxjava.thread.violation)
         Observable.merge(o1, o2).subscribe(uiEffectfulAction);
     }
