@@ -1,14 +1,13 @@
 # RxThreadEffectChecker
 
-The RxThreadEffectChecker is our prototype static analysis tool for preventing UI access off the main thread in stream-based (RxJava/RxAndroid) Android applications.
+The RxThreadEffectChecker is a static analysis tool for preventing UI access off the main thread in stream-based (RxJava/RxAndroid) Android applications.
 
 We are publishing this code as a companion artifact for our ASE 2018 paper:
 
 > **Safe Stream-Based Programming with Refinement Types**. Benno Stein, Lazaro Clapp, Manu Sridharan, Bor-Yuh Evan Chang. ASE 2018 (arxiv: https://arxiv.org/abs/1808.02998 )
 
-This checker builds heavily on the Checker Framework, and particularly it works in tandem with their `guieffect` checker. Besides the code in this repository, we have worked to upstream changes to the Checker Framework that make this checker possible.
+This checker builds heavily on the [Checker Framework](https://checkerframework.org/), and particularly it works in tandem with their `guieffect` checker. Besides the code in this repository, we have worked to upstream changes to the Checker Framework that make this checker possible.  Note that running this checker requires using `javac` from JDK 8, and hence it cannot be run alongside [Error Prone](http://errorprone.info/) in the same build.
 
-Although the tool is fully functional, we recommend people interested in deploying this type of checking in an industry setting to wait a few months, as we are currently in the process of switching internally to an Error Prone based checker that is easier to set-up. This version of the tooling was open-sourced chiefly to help reproducibility of our ASE 2018 results.
 
 # From the ASE 2018 paper's abstract
 
