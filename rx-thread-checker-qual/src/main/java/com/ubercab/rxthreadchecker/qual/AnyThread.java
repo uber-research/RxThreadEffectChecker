@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  * on the thread-pool of all streams, and is used when a more precise bound can't be determined.
  */
 @DefaultQualifierInHierarchy
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE_USE, ElementType.TYPE_PARAMETER})
 @SubtypeOf({})
 public @interface AnyThread {}

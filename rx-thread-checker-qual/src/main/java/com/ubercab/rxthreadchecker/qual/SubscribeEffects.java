@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
  * arguments' effect types. The effects of the arguments at positions {@param value} must be
  * compatible with the receiver's thread.
  */
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 @Target({ElementType.METHOD})
 public @interface SubscribeEffects {
 

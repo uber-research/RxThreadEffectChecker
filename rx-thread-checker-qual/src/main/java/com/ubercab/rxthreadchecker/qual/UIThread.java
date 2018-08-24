@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * on the UI thread.
  */
 @Documented
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE_USE, ElementType.TYPE_PARAMETER})
 @SubtypeOf({AnyThread.class})
 public @interface UIThread {}

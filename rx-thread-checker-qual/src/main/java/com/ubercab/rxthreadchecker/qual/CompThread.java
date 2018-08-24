@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * A stream (i.e. an RxJava Observable) annotated @CompThread will always execute subscribed
  * callbacks on a background computation thread.
  */
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE_USE, ElementType.TYPE_PARAMETER})
 @SubtypeOf({AnyThread.class})
 public @interface CompThread {}
