@@ -19,12 +19,3 @@ We implement the system as an annotation-based Java typechecker for Android prog
 # Building and running basic unit tests
 
 `./gradlew build`
-
-# Running ASE 2018 paper experiments
-
-ToDo: Benno(?)
-
-# In progress:
-
-* Switch to CF 2.5.5 as soon as they release, which has our inference and `@MainThread` support fixes.
-* Add ASE 2018 experiments
