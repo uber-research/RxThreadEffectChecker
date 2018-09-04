@@ -33,9 +33,8 @@ public class RxThreadCheckerTest extends CheckerFrameworkPerDirectoryTest {
         null,
         "-Anomsgtext",
             "-Anocheckjdk",
-            "-AprintErrorStack",
-            //"-AstubWarnIfNotFound",
-            //"-AstubWarnIfNotFoundIgnoresClasses",
+            "-AstubWarnIfNotFound",
+            "-AstubWarnIfNotFoundIgnoresClasses",
             "-Astubs="+testStubString());
   }
 
