@@ -16,7 +16,7 @@
 
 def versions = [
     androidStubs           : "4.1.1.4",
-    checkerFramework       : "2.5.4",
+    checkerFramework       : "2.5.5",
     junit4                 : "4.12",
     rxAndroid2             : "2.0.2",
     rxJava2                : "2.2.0",
@@ -33,7 +33,7 @@ def build = [
 
 def test = [
   androidStubs             : "com.google.android:android:${versions.androidStubs}",
-  checkerframeworkTestlib  : "org.checkerframework:testlib:${versions.checkerFramework}",
+  checkerframeworkTestlib  : "org.checkerframework:framework-test:${versions.checkerFramework}",
   junit4                   : "junit:junit:${versions.junit4}",
 ]
 
