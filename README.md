@@ -19,3 +19,27 @@ We implement the system as an annotation-based Java typechecker for Android prog
 # Building and running basic unit tests
 
 `./gradlew build`
+
+# Analyzing your Android application
+
+After successfully building with `./gradlew build`, there will be a jar containing the checker at `./rx-thread-checker/build/libs/rx-thread-checker.jar`, another jar containing the annotation classes at `./rx-thread-checker-qual/build/libs/rx-thread-checker-qual.jar`, and annotation stub files in `./rx-thread-checker/src/main/resources/stub`
+
+First, add the following dependencies to your `build.gradle`: (or equivalent imports in other build systems)
+
+```gradle
+annotationProcessor files('<path to rx-thread-checker.jar>', '<path to rx-thread-checker-qual.jar>')
+annotationProcessor 'org.checkerframework:checker:2.5.5'
+implementation files('<path to rx-threaad-checker-qual.jar>')
+implementation 'org.checkerframework:checker:2.5.5'
+```
+
+Next, configure your build to run the checker by adding the following snippet to your `build.gradle` (or add equivalent `javac` flags in other build systems):
+```gradle
+tasks.withType(JavaCompile) {
+  options.compilerArgs << "-processor" << "com.ubercab.rxthreadchecker.RxThreadchecker" << "-Astubs=<path to stubs directory>"
+}
+```
+
+To run the checker without compiling the application, add the flag `-proc:only` to the above.
+
+See our [sample app](https://github.com/uber-research/RxThreadEffectChecker/blob/master/sample-app) for a simple but complete application with the RxThreadEffectChecker integrated into its build according to these instructions.
